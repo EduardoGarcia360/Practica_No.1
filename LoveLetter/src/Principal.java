@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Principal {
 
-	public static int num = 0, tokens = 0;
+	public static int num = 0, tokens = 0, token_partida1 = 0, token_partida2 = 0;
+	public static String cartasFuera="", nombreCarta="";
 	public static void main(String[] args) {
-		
 		System.out.println("- = Bienvenido a Love Letter = -");
 		System.out.println("(1) Jugar una partida.");
 		System.out.println("(2) Seleccionar el numero de tokens a jugar.");
@@ -37,17 +37,71 @@ public class Principal {
 							   String rival = nom2.nextLine();
 							   
 							   System.out.println("a continuacion se decidira quien inicia");
-							   Random aleatorio = new Random();
-							   int randomNum = aleatorio.nextInt(2);
-							   randomNum=randomNum*10;
-							   if (randomNum==0){
+							   Random aleatorio_juga = new Random();
+							   int randomJuga = aleatorio_juga.nextInt(2);
+							   randomJuga=randomJuga*10;
+							   if (randomJuga==0){
 								   System.out.println("Inicia el jugador principal");
 							   }else{
 								   System.out.println("Inicia el jugador dos");
 							   }
 							   System.out.println("se jugaran " +tokens+ " tokens");
-							}
 							   
+							   //(random para las cartas fuera)//
+							   for (int i=0; i<=4; i++){
+								   Random aleatorio_cartas = new Random();
+								   int randomCartas = aleatorio_cartas.nextInt(16);
+								   randomCartas=randomCartas;
+								   if (i==4){
+									   nombreCarta="(?) ???";
+									   cartasFuera= cartasFuera + nombreCarta;
+									   System.out.println(cartasFuera);
+								   }else{
+									   if (randomCartas<=4){
+										   nombreCarta="(1) Guard";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas<=6){
+										   nombreCarta="(2) Priest";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas<=8){
+										   nombreCarta="(3) Baron";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas<=10){
+										   nombreCarta="(4) Handmaid";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas<=12){
+										   nombreCarta="(5) Prince";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas==13){
+										   nombreCarta="(6) King";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas==14){
+										   nombreCarta="(7) Countess";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }else if (randomCartas==15){
+										   nombreCarta="(8) Princess";
+										   cartasFuera= cartasFuera + nombreCarta;
+										   System.out.println(cartasFuera);
+									   }
+								   }
+								   
+
+							   }
+							  
+							   
+							   
+							   
+							   
+							   ///dentro del ciclo
+							   System.out.println(usuario + ": " + token_partida1 + "           " + rival + ": " + token_partida2 );
+							}
 							   
 					    break;
 						case 2:
@@ -55,26 +109,20 @@ public class Principal {
 							   Scanner token_num = new Scanner(System.in);
 							   tokens=token_num.nextInt();
 							   			if ((tokens>3) || (tokens<=0)){
-							   				do{
 							   				System.out.println("El numero maximo para un token es 3.\nIngrese otro valor.");
-								            tokens=token_num.nextInt();
-							   				}
-							   				while ((tokens>3) || (tokens<=0));
+								            Principal.main(null);
 							   			}else{
 							   				switch(tokens){
 							   				case 1:
 							   					  System.out.println("Para la proxima partida se jugara con 1 token");
-							   					  tokens=tokens+1;
 							   					  Principal.main(null);
 							   				break;
 							   				case 2:
 							   					  System.out.println("Para la proxima partida se jugara con 2 tokens");
-							   					  tokens=tokens+2;
 							   					  Principal.main(null);
 							   				break;
 							   				case 3:
 							   					  System.out.println("Para la proxima partida se jugara con 3 tokens");
-							   					  tokens=tokens+3;
 							   					  Principal.main(null);
 							   				break;
 							   				}//fin switch tokens
@@ -90,6 +138,7 @@ public class Principal {
 							   System.out.println("(6) King:\nIntercambia manos entre jugadores.(1 en el mazo)");
 							   System.out.println("(7) Countess:\nSi el jugador tiene un Prince o King en su mano\ny la Countess debe jugar la Countess. (1 en el mazo)");
 							   System.out.println("(8) Princess:\nSi el jugador juega esta carta pierde el juego. (1 en el mazo)");
+							   Principal.main(null);
 						break;
 						case 4:
 							   System.exit(1);
