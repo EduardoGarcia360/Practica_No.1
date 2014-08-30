@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Principal {
 
-	
+	public static int num = 0, tokens = 0;
 	public static void main(String[] args) {
-		int num = 0, tokens=0;
+		
 		System.out.println("- = Bienvenido a Love Letter = -");
 		System.out.println("(1) Jugar una partida.");
 		System.out.println("(2) Seleccionar el numero de tokens a jugar.");
@@ -24,7 +24,7 @@ public class Principal {
 						switch (num){
 						case 1:
 							if(tokens==0) {
-								System.out.println("Antes de empezar debe elegir un numero de tokens\nvuelva a correr el programa");
+								System.out.println("Antes de empezar debe elegir un numero de tokens.");
 								Principal.main(null);
 							}else{
 							System.out.println("ha seleccionado jugar una partida.\nIngrese lo que a continuacion se le pide:");
@@ -45,6 +45,7 @@ public class Principal {
 							   }else{
 								   System.out.println("Inicia el jugador dos");
 							   }
+							   System.out.println("se jugaran " +tokens+ " tokens");
 							}
 							   
 							   
@@ -63,13 +64,18 @@ public class Principal {
 							   				switch(tokens){
 							   				case 1:
 							   					  System.out.println("Para la proxima partida se jugara con 1 token");
-							   					  
+							   					  tokens=tokens+1;
+							   					  Principal.main(null);
 							   				break;
 							   				case 2:
 							   					  System.out.println("Para la proxima partida se jugara con 2 tokens");
+							   					  tokens=tokens+2;
+							   					  Principal.main(null);
 							   				break;
 							   				case 3:
 							   					  System.out.println("Para la proxima partida se jugara con 3 tokens");
+							   					  tokens=tokens+3;
+							   					  Principal.main(null);
 							   				break;
 							   				}//fin switch tokens
 							   			}
