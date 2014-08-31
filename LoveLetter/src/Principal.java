@@ -36,65 +36,64 @@ public class Principal {
 							   Scanner nom2 = new Scanner(System.in);
 							   String rival = nom2.nextLine();
 							   
-							   System.out.println("a continuacion se decidira quien inicia");
+							   
 							   Random aleatorio_juga = new Random();
 							   int randomJuga = aleatorio_juga.nextInt(2);
 							   randomJuga=randomJuga*10;
 							   if (randomJuga==0){
 								   System.out.println("Inicia el jugador principal");
 							   }else{
-								   System.out.println("Inicia el jugador dos");
+								   System.out.println("Inicia el jugador dos (PC)");
 							   }
-							   System.out.println("se jugaran " +tokens+ " tokens");
+							   
 							   
 							   //(random para las cartas fuera)//
-							   for (int i=0; i<=4; i++){
+							   for (int i=0; i<4; i++){
 								   Random aleatorio_cartas = new Random();
 								   int randomCartas = aleatorio_cartas.nextInt(16);
 								   randomCartas=randomCartas;
-								   if (i==4){
+								   if (i==3){
 									   nombreCarta="(?) ???";
-									   cartasFuera= cartasFuera + nombreCarta;
-									   System.out.println(cartasFuera);
+									   cartasFuera= cartasFuera + " - " + nombreCarta;
+									   
 								   }else{
 									   if (randomCartas<=4){
 										   nombreCarta="(1) Guard";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas<=6){
 										   nombreCarta="(2) Priest";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas<=8){
 										   nombreCarta="(3) Baron";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas<=10){
 										   nombreCarta="(4) Handmaid";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas<=12){
 										   nombreCarta="(5) Prince";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas==13){
 										   nombreCarta="(6) King";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas==14){
 										   nombreCarta="(7) Countess";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }else if (randomCartas==15){
 										   nombreCarta="(8) Princess";
-										   cartasFuera= cartasFuera + nombreCarta;
-										   System.out.println(cartasFuera);
+										   cartasFuera= cartasFuera + " - " + nombreCarta;
+										   
 									   }
 								   }
-								   
-
 							   }
-							  
+							   System.out.println("Las cartas que estan fuera son:");
+							   System.out.println(cartasFuera);
 							   
 							   
 							   
