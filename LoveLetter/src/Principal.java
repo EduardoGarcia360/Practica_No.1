@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Principal {
 
-	public static int num = 0, tokens = 0, token_usuario = 0, token_rival = 0, card1=0, card2=0, card3=0, card4=0;
+	public static int num=0, tokens=0, token_usuario=0, token_rival=0, card1=0, card2=0, card3=0, card4=0, c2=0, c3=0, c4=0;
 	public static String nombreCarta="", cartasFuera="", nomCard1="", nomCard2="", nomCard3="", nomCard4="";
 	public static void main(String[] args) {
 		System.out.println("- = Bienvenido a Love Letter = -");
@@ -39,103 +39,128 @@ public class Principal {
 										   System.out.println("Inicia el rival (PC)");
 									   }
 							   //(inicia ciclo para quitar 4 cartas)\\
-							   for (int i=0; i<4; i++){
-								   Random aleatorio_cartas = new Random();
-								   int randomCartas = aleatorio_cartas.nextInt(16);
-								   if (i==0){
-									   if (randomCartas<=4){
-										   nomCard1="(1) Guard";
-										   card1=randomCartas;
-									   }else if(randomCartas<=6){
-										   nomCard1="(2) Priest";
-										   card1=randomCartas;
-									   }else if(randomCartas<=8){
-										   nomCard1="(3) Baron";
-										   card1=randomCartas;
-									   }else if(randomCartas<=10){
-										   nomCard1="(4) Handmaid";
-										   card1=randomCartas;
-									   }else if(randomCartas<=12){
-										   nomCard1="(5) Prince";
-										   card1=randomCartas;
-									   }else if(randomCartas==13){
-										   nomCard1="(6) King";
-										   card1=randomCartas;
-									   }else if(randomCartas==14){
-										   nomCard1="(7) Countess";
-										   card1=randomCartas;
-									   }else if(randomCartas==15){
-										   nomCard1="(8) Princess";
-										   card1=randomCartas;
-									   }
-								   }else if(i==1){//(fin if I=0)\\
-									   Random aleatorio_card2 = new Random();
-									   int randomCard2 = aleatorio_card2.nextInt(15);
-										   if(randomCard2<=4){
-											   nomCard2="(1) Guard";
-											   card2=randomCard2;
-										   }else if(randomCard2<=6){
-											   nomCard2="(2) Priest";
-											   card2=randomCard2;
-										   }else if(randomCard2<=8){
-											   nomCard2="(3) Baron";
-											   card2=randomCard2;
-										   }else if(randomCard2<=10){
-											   nomCard2="(4) Handmaid";
-											   card2=randomCard2;
-										   }else if(randomCard2<=12){
-											   nomCard2="(5) Prince";
-											   card2=randomCard2;
-										   }else if(randomCard2==13){
-											   nomCard2="(6) King";
-											   card2=randomCard2;
-										   }else if(randomCard2==14){
-											   nomCard2="(7) Countess";
-											   card2=randomCard2;
-										   }
-								   }else if(i==2){ //(Fin si i=1)\\
-									   Random aleatorio_card3 = new Random();
-									   int randomCard3 = aleatorio_card3.nextInt(14);
-										   if(randomCard3<=4){
-											   nomCard3="(1) Guard";
-											   card3=randomCard3;
-										   }else if(randomCard3<=6){
-											   nomCard3="(2) Priest";
-											   card3=randomCard3;
-										   }else if(randomCard3<=8){
-											   nomCard3="(3) Baron";
-											   card3=randomCard3;
-										   }else if(randomCard3<=10){
-											   nomCard3="(4) Handmaid";
-											   card3=randomCard3;
-										   }else if(randomCard3<=12){
-											   nomCard3="(5) Prince";
-											   card3=randomCard3;
-										   }else if(randomCard3==13){
-											   nomCard3="(6) King";
-											   card3=randomCard3;
-										   }
-								   }else if(i==3){ //(fin si i=2)\\
-									   Random aleatorio_card4 = new Random();
-									   int randomCard4 = aleatorio_card4.nextInt(13);
-										   if(randomCard4<=4){
-											   nomCard4="(1) Guard";
-											   card4=randomCard4;
-										   }else if(randomCard4<=6){
-											   nomCard4="(2) Priest";
-											   card4=randomCard4;
-										   }else if(randomCard4<=8){
-											   nomCard4="(3) Baron";
-											   card4=randomCard4;
-										   }else if(randomCard4<=10){
-											   nomCard4="(4) Handmaid";
-											   card4=randomCard4;
-										   }else if(randomCard4<=12){
-											   nomCard4="(5) Prince";
-											   card4=randomCard4;
-										   }
-								   } //(fin si i=3)\\
-							} //(fin ciclo quitar 4 cartas)\\
+									   for (int i=0; i<4; i++){
+										   Random aleatorio_cartas = new Random();
+										   int randomCartas = aleatorio_cartas.nextInt(16);
+										   if (i==0){
+											   if (randomCartas<=4){
+												   nomCard1="(1) Guard";
+												   card1=randomCartas;
+											   }else if(randomCartas<=6){
+												   nomCard1="(2) Priest";
+												   card1=randomCartas;
+											   }else if(randomCartas<=8){
+												   nomCard1="(3) Baron";
+												   card1=randomCartas;
+											   }else if(randomCartas<=10){
+												   nomCard1="(4) Handmaid";
+												   card1=randomCartas;
+											   }else if(randomCartas<=12){
+												   nomCard1="(5) Prince";
+												   card1=randomCartas;
+											   }else if(randomCartas==13){
+												   nomCard1="(6) King";
+												   card1=randomCartas;
+											   }else if(randomCartas==14){
+												   nomCard1="(7) Countess";
+												   card1=randomCartas;
+											   }else if(randomCartas==15){
+												   nomCard1="(8) Princess";
+												   card1=randomCartas;
+											   }
+										   }else if(i==1){//(fin if I=0)\\
+											   do{
+												   Random aleatorio_card2 = new Random();
+												   int randomCard2 = aleatorio_card2.nextInt(15);
+												   if(card1==randomCard2){
+													   c2=c2-1;
+												   }else{
+													   if(randomCard2<=4){
+														   nomCard2="(1) Guard";
+														   card2=randomCard2;
+													   }else if(randomCard2<=6){
+														   nomCard2="(2) Priest";
+														   card2=randomCard2;
+													   }else if(randomCard2<=8){
+														   nomCard2="(3) Baron";
+														   card2=randomCard2;
+													   }else if(randomCard2<=10){
+														   nomCard2="(4) Handmaid";
+														   card2=randomCard2;
+													   }else if(randomCard2<=12){
+														   nomCard2="(5) Prince";
+														   card2=randomCard2;
+													   }else if(randomCard2==13){
+														   nomCard2="(6) King";
+														   card2=randomCard2;
+													   }else if(randomCard2==14){
+														   nomCard2="(7) Countess";
+														   card2=randomCard2;
+													   }
+													   c2=c2+1;
+												   }
+											   }
+											   while (c2<1);					   
+										   }else if(i==2){ //(Fin si i=1)\\
+											   do{
+												   Random aleatorio_card3 = new Random();
+												   int randomCard3 = aleatorio_card3.nextInt(14);
+												   if((card1==randomCard3) || (card2==randomCard3)){
+													   c3=c3-1;
+												   }else{
+													   if(randomCard3<=4){
+														   nomCard3="(1) Guard";
+														   card3=randomCard3;
+													   }else if(randomCard3<=6){
+														   nomCard3="(2) Priest";
+														   card3=randomCard3;
+													   }else if(randomCard3<=8){
+														   nomCard3="(3) Baron";
+														   card3=randomCard3;
+													   }else if(randomCard3<=10){
+														   nomCard3="(4) Handmaid";
+														   card3=randomCard3;
+													   }else if(randomCard3<=12){
+														   nomCard3="(5) Prince";
+														   card3=randomCard3;
+													   }else if(randomCard3==13){
+														   nomCard3="(6) King";
+														   card3=randomCard3;
+													   }
+													   c3=c3+1;
+												   }
+											   }
+											   while(c3<1);
+										   }else if(i==3){ //(fin si i=2)\\
+											   do{
+												   Random aleatorio_card4 = new Random();
+												   int randomCard4 = aleatorio_card4.nextInt(13);
+												   if((card1==randomCard4) || (card2==randomCard4) || (card3==randomCard4)){
+													   c4=c4-1;
+												   }else{
+													   if(randomCard4<=4){
+														   nomCard4="(1) Guard";
+														   card4=randomCard4;
+													   }else if(randomCard4<=6){
+														   nomCard4="(2) Priest";
+														   card4=randomCard4;
+													   }else if(randomCard4<=8){
+														   nomCard4="(3) Baron";
+														   card4=randomCard4;
+													   }else if(randomCard4<=10){
+														   nomCard4="(4) Handmaid";
+														   card4=randomCard4;
+													   }else if(randomCard4<=12){
+														   nomCard4="(5) Prince";
+														   card4=randomCard4;
+													   }
+													   c4=c4+1;
+												   }
+												   
+											   }
+											   while(c4<1);
+										   } //(fin si i=3)\\
+									} //(fin ciclo for)\\
 							 System.out.println("las cartas fuera son: " + nomCard1 + nomCard2 + nomCard3 + nomCard4);
 
 							   
