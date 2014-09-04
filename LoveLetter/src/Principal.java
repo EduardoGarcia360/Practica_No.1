@@ -7,7 +7,7 @@ public class Principal {
 
 	public static int num=0, tokens=0, token_usuario=0, token_rival=0, card1=0, card2=0, card3=0, card4=0, c2=0, c3=0, c4=0, a=0;
 	public static int cTotales=16, cRestantes=16, cM1=0, cM2=0, CardmanoU1=0, CardmanoR1=0, CardmanoU2=0, CardmanoR2=0;
-	public static int cNU1=0, cNU2=0, cNR1=0, cNR2=0, UCard=0, turno=0, toke=0, guardeleccion=0, Carta_usada=-1;
+	public static int cNU1=0, cNU2=0, cNR1=0, cNR2=0, UCard=0, turno=0, toke=0, guardeleccion=0, princeeleccion=0, Carta_usada=-1;
 	public static int cemU1=-1, cemU2=-1, cemU3=-1, cemU4=-1, cemU5=-1, cemU6=-1;
 	public static String nombreCarta="", cartasFuera="", nomCard1="", nomCard2="", nomCard3="", nomCard4="";
 	public static String nomCardmanoR1="", nomCardmanoU1="", nomCardmanoR2="", nomCardmanoU2="";
@@ -185,26 +185,367 @@ public class Principal {
 			System.out.println("(2) Priest - (3) Baron - (4) Handmaid - (5) Prince - (6) King - (7) Countess - (8) Princess");
 			Scanner guard_eleccion = new Scanner(System.in);
 			guardeleccion = guard_eleccion.nextInt();
-			if((guardeleccion==CardmanoR1) || (guardeleccion==CardmanoR2)){
-				System.out.println("el ganador es el usuario");
-				turno=turno+20;
-				token_usuario=token_usuario+1;
-			}else{
-				System.out.println("nada ha pasado");
-				cRestantes=cRestantes-1;
-				Carta_usada=CardmanoU1;
-				nomCardmanoU1="";
-				Principal.CementerioUsuario();
-			}
-		} else if(CardmanoU1<7){
+			Principal.CartaGuardU1();
+		}
+		if(CardmanoU1<7){
 			System.out.println("las cartas del rival ya las puedes ver");
 			cRestantes=cRestantes-1;
 			Carta_usada=CardmanoU1;
 			nomCardmanoU1="";
 			Principal.CementerioUsuario();
-		} else if(CardmanoU1<9){
-			
 		}
+		if(CardmanoU1<9){
+			Principal.CartaBaronU1();
+		}
+		if(CardmanoU1<11){
+			System.out.println("protegido");
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoU1;
+			nomCardmanoU1="";
+			Principal.CementerioUsuario();
+		}
+		if(CardmanoU1<13){
+			System.out.println("ingrese (1) para botar su mano. ingrese (2) para botar la mano del rival.");
+			Scanner prince_eleccion = new Scanner(System.in);
+			princeeleccion = prince_eleccion.nextInt();
+			if(princeeleccion==1){
+				cRestantes=cRestantes-1;
+				nomCardmanoU1="";
+				nomCardmanoU2="";
+				Carta_usada=CardmanoU1;
+				Principal.CementerioUsuario();
+				Carta_usada=CardmanoU2;
+				Principal.CementerioUsuario();
+				Principal.NuevacartaU1();
+			}else if(princeeleccion==2){
+				cRestantes=cRestantes-1;
+				nomCardmanoR1="";
+				nomCardmanoR2="";
+				Carta_usada=CardmanoR1;
+				Principal.CementerioRival();
+				Carta_usada=CardmanoR2;
+				Principal.CementerioRival();
+				Principal.NuevacartaR1();
+			}
+		}
+		if(CardmanoU1==13){
+			System.out.println("se van a intercambiar manos entre jugadores.");
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoU1;
+			nomCardmanoU1=nomCardmanoR1;
+			nomCardmanoU2=nomCardmanoR2;
+			nomCardmanoR1=nomCardmanoU1;
+			nomCardmanoR2=nomCardmanoU2;
+			Principal.CementerioUsuario();
+		}
+		if(CardmanoU1==14){
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoU1;
+			Principal.CementerioUsuario();
+		}
+		if(CardmanoU1==15){
+			System.out.println("has jugado a la princess perdiste el juego gana el rival");
+			turno=turno+20;
+		}
+		
+	}
+	private static void CartaBaronU1() {
+		if(CardmanoU2<5){
+			if((CardmanoR1>=5) || (CardmanoR2>=5)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("empate no paso nada");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2<7){
+			if((CardmanoR1>=7) || (CardmanoR2>=7)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=4) || (CardmanoR2<=4)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2<9){
+			if((CardmanoR1>=9) || (CardmanoR2>=9)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=6) || (CardmanoR2<=6)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2<11){
+			if((CardmanoR1>=11) || (CardmanoR2>=11)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=8) || (CardmanoR2<=8)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2<13){
+			if((CardmanoR1>=13) || (CardmanoR2>=13)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=10) || (CardmanoR2<=10)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2==13){
+			if((CardmanoR1>=14) || (CardmanoR2>=14)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=12) || (CardmanoR2<=12)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2==14){
+			if((CardmanoR1==15) || (CardmanoR2==15)){
+				System.out.println("gano el rival");
+				token_rival=token_rival+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else if((CardmanoR1<=13) || (CardmanoR2<=13)){
+				System.out.println("gana el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else {
+				System.out.println("empate nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		if(CardmanoU2==15){
+			System.out.println("gana el usuario");
+			token_usuario=token_usuario+1;
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoU1;
+			nomCardmanoU1="";
+			Principal.CementerioUsuario();
+			turno=turno+20;
+		}
+		
+	}
+	private static void CartaGuardU1() {
+		if(guardeleccion==2){
+			if((CardmanoR1<7) || (CardmanoR2<7)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==3){
+			if((CardmanoR1<9) || (CardmanoR2<9)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==4){
+			if((CardmanoR1<11) || (CardmanoR2<11)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==5){
+			if((CardmanoR1<13) || (CardmanoR2<13)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==6){
+			if((CardmanoR1==13) || (CardmanoR2==13)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==7){
+			if((CardmanoR1==14) || (CardmanoR2==14)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}else if(guardeleccion==8){
+			if((CardmanoR1==15) || (CardmanoR2==15)){
+				System.out.println("el ganador es el usuario");
+				token_usuario=token_usuario+1;
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+				turno=turno+20;
+			}else{
+				System.out.println("el rival no tiene esa carta, nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		}
+		
+	}
+	private static void CementerioRival() {
+		// TODO Auto-generated method stub
 		
 	}
 	private static void CementerioUsuario() {
