@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 public class Principal {
 
-	public static int num=0, tokens=0, token_usuario=0, token_rival=0, card1=0, card2=0, card3=0, card4=0, c2=0, c3=0, c4=0;
+	public static int num=0, tokens=0, token_usuario=0, token_rival=0, card1=0, card2=0, card3=0, card4=0, c2=0, c3=0, c4=0, a=0;
 	public static int cTotales=16, cRestantes=16, cM1=0, cM2=0, CardmanoU1=0, CardmanoR1=0, CardmanoU2=0, CardmanoR2=0;
-	public static int cNU1=0, cNU2=0, cNR1=0, cNR2=0;
+	public static int cNU1=0, cNU2=0, cNR1=0, cNR2=0, UCard=0, turno=0, toke=0, guardeleccion=0, Carta_usada=-1;
+	public static int cemU1=-1, cemU2=-1, cemU3=-1, cemU4=-1, cemU5=-1, cemU6=-1;
 	public static String nombreCarta="", cartasFuera="", nomCard1="", nomCard2="", nomCard3="", nomCard4="";
 	public static String nomCardmanoR1="", nomCardmanoU1="", nomCardmanoR2="", nomCardmanoU2="";
 	public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class Principal {
 							if(tokens==0) {
 								System.out.println("Antes de empezar debe elegir un numero de tokens.");
 								Principal.main(null);
-								menu_eleccion.close();
+								
 							}else{
 							System.out.println("ha seleccionado jugar una partida.\nIngrese lo que a continuacion se le pide:");
 							   System.out.println("Ingrese su nombre: ");
@@ -40,36 +41,64 @@ public class Principal {
 							   String rival = nom2.nextLine();
 							   
 									   Random aleatorio_jugador = new Random();
-									   int randomJugador = aleatorio_jugador.nextInt(2);
+									   int randomJugador = aleatorio_jugador.nextInt(1);
 									   if (randomJugador==0){
 										   System.out.println("Inicia " + usuario + " usuario.");
+										   a=2;
 									   }else if(randomJugador==1){
 										   System.out.println("Inicia " + rival + " rival(pc)");
+										   a=3;
 									   }
 									   
 									   //inicia
 									   Principal.Cartasdescartadas();
+									   System.out.println("las cartas fuera son: " + nomCard1 + nomCard2 + nomCard3 + nomCard4);
 									   //fin
 									   
 									   //inicia
 									   Principal.Primeramano();
-									   //fin
-									   Principal.NuevacartaU1();
-									   Principal.NuevacartaU2();
-									   Principal.NuevacartaR1();
-									   Principal.NuevacartaR2();
-										System.out.println("las cartas fuera son: " + nomCard1 + nomCard2 + nomCard3 + nomCard4);
-										System.out.println(usuario + ": " + token_usuario + " tokens. " + rival + ": " + token_rival + " tokens." );
-										
-										//dentro del ciclo
-							 System.out.println("el estado del mazo restante es: " + cRestantes + " carta(s).");
-							 System.out.println("el rival tiene en su mano: " + nomCardmanoR1 + " , " + nomCardmanoR2);
-							 System.out.println("____________________________________________");
-								System.out.println("tienes en tu mano: " + nomCardmanoU1 + " , " + nomCardmanoU2);
-								System.out.println("(1) usar carta#1\n(2) usar carta#2\n(3) termina el juego");
-
-							   
-							   ///dentro del ciclo
+									   //inicia for principal
+										for(toke=0;toke<tokens;toke++){
+											if(toke<tokens){
+												System.out.println(usuario + ": " + token_usuario + " tokens. " + rival + ": " + token_rival + " tokens." );
+												
+												for(turno=a; turno<20; turno++){
+													System.out.println("el estado del mazo restante es: " + cRestantes + " carta(s).");
+												    System.out.println("el rival tiene en su mano: " + nomCardmanoR1 + " , " + nomCardmanoR2);
+												    System.out.println("____________________________________________");
+													System.out.println("tienes en tu mano: " + nomCardmanoU1 + " , " + nomCardmanoU2);
+													System.out.println("(1) usar carta#1\n(2) usar carta#2\n(3) termina el juego");
+														if(turno%2==0){
+															if(nomCardmanoU1==""){
+																 Principal.NuevacartaU1();
+															}else if(nomCardmanoU2==""){
+																Principal.NuevacartaU2();
+															}
+															Principal.TurnoUsuario();
+														}else if(turno%2==1){
+															if(nomCardmanoR1==""){
+																Principal.NuevacartaR1();
+															} else if(nomCardmanoR2==""){
+																Principal.NuevacartaR2();
+															}
+															//codigo de cartas para la pc
+														}
+													}//fin for para turnos
+												
+											}else if(toke==tokens){
+												if(token_usuario < token_rival){
+													System.out.println("Ha ganado la PC");
+													System.exit(1);
+												}else if(token_usuario > token_rival){
+													System.out.println("Ha ganado el usuario");
+													System.exit(1);
+												}else if(token_usuario==token_rival){
+													System.out.println("Ha habido un empate");
+													System.exit(1);
+												}//fin comparacion de resultados
+											}//fin si toke es menor a tokens
+										}//fin for principal
+					
 							   
 							}
 							   
@@ -118,6 +147,81 @@ public class Principal {
 					
 					
 				}
+	}
+	private static void TurnoUsuario() {
+		do{
+			Scanner U_eleccion = new Scanner(System.in);
+			UCard = U_eleccion.nextInt();
+			if((UCard<=0) || (UCard>3)){
+				System.out.println("solo pede elegir: 1, 2 o 3");
+			}
+		}
+		while ((UCard<=0) || (UCard>3));
+		Scanner U_eleccion = new Scanner(System.in);
+		UCard = U_eleccion.nextInt();
+		switch (UCard) {
+			case 1:
+				Principal.CondicionesCartaU1();
+		    break;
+			case 2:
+				Principal.CondicionesCartaU2();
+			break;
+			case 3:
+				System.out.println("te has rendido ha ganado la pc");
+				System.exit(1);
+		    break;
+		    
+		}
+		
+	}
+	private static void CondicionesCartaU2() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void CondicionesCartaU1() {
+		if(CardmanoU1<5){
+			System.out.println("elija la carta que cree usted que tiene el rival");
+			System.out.println("ingresando el numero correspondiente");
+			System.out.println("(2) Priest - (3) Baron - (4) Handmaid - (5) Prince - (6) King - (7) Countess - (8) Princess");
+			Scanner guard_eleccion = new Scanner(System.in);
+			guardeleccion = guard_eleccion.nextInt();
+			if((guardeleccion==CardmanoR1) || (guardeleccion==CardmanoR2)){
+				System.out.println("el ganador es el usuario");
+				turno=turno+20;
+				token_usuario=token_usuario+1;
+			}else{
+				System.out.println("nada ha pasado");
+				cRestantes=cRestantes-1;
+				Carta_usada=CardmanoU1;
+				nomCardmanoU1="";
+				Principal.CementerioUsuario();
+			}
+		} else if(CardmanoU1<7){
+			System.out.println("las cartas del rival ya las puedes ver");
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoU1;
+			nomCardmanoU1="";
+			Principal.CementerioUsuario();
+		} else if(CardmanoU1<9){
+			
+		}
+		
+	}
+	private static void CementerioUsuario() {
+		if (cemU1==-1){
+			cemU1=Carta_usada;
+		}else if(cemU2==-1){
+			cemU2=Carta_usada;
+		}else if(cemU3==-1){
+			cemU3=Carta_usada;
+		}else if(cemU4==-1){
+			cemU4=Carta_usada;
+		}else if(cemU5==-1){
+			cemU5=Carta_usada;
+		}else if(cemU6==-1){
+			cemU6=Carta_usada;
+		}
+		
 	}
 	private static void NuevacartaR2() {
 		do{
