@@ -61,11 +61,8 @@ public class Principal {
 										for(toke=0;toke<tokens;toke++){
 											if(toke<tokens){
 												System.out.println(usuario + ": " + token_usuario + " tokens. " + rival + ": " + token_rival + " tokens." );
-												
 												for(turno=a; turno<20; turno++){
 													System.out.println("el estado del mazo restante es: " + cRestantes + " carta(s).");
-												    System.out.println("el rival tiene en su mano: " + nomCardmanoR1 + " , " + nomCardmanoR2);
-												    System.out.println("____________________________________________");
 													cRestantes=16;
 													
 														if(turno%2==0){
@@ -74,33 +71,38 @@ public class Principal {
 															}else if(nomCardmanoU2==""){
 																Principal.NuevacartaU2();
 															}
+															System.out.println("el rival tiene en su mano: " + nomCardmanoR1 + " , " + nomCardmanoR2);
+															System.out.println("--------------------------------------------------------");
 															System.out.println("tienes en tu mano: " + nomCardmanoU1 + " , " + nomCardmanoU2);
 															System.out.println("(1) usar carta#1\n(2) usar carta#2\n(3) termina el juego");
 															Principal.TurnoUsuario();
+															turno=turno+20;
 														}else if(turno%2==1){
 															if(nomCardmanoR1==""){
 																Principal.NuevacartaR1();
 															} else if(nomCardmanoR2==""){
 																Principal.NuevacartaR2();
 															}
+															System.out.println("el rival tiene en su mano: " + nomCardmanoR1 + " , " + nomCardmanoR2);
+															System.out.println("--------------------------------------------------------");
+															System.out.println("tienes en tu mano: " + nomCardmanoU1 + " , " + nomCardmanoU2);
+															System.out.println("(1) usar carta#1\n(2) usar carta#2\n(3) termina el juego");
 															Principal.TurnoRival();
-															//codigo de cartas para la pc
 														}
-													}//fin for para turnos
+												}//fin for para turnos
 												
-											}else if(toke==tokens){
-												if(token_usuario < token_rival){
-													System.out.println("Ha ganado la PC");
-													System.exit(1);
-												}else if(token_usuario > token_rival){
-													System.out.println("Ha ganado el usuario");
-													System.exit(1);
-												}else if(token_usuario==token_rival){
-													System.out.println("Ha habido un empate");
-													System.exit(1);
-												}//fin comparacion de resultados
-											}//fin si toke es menor a tokens
-										}//fin for principal   
+											}
+										}//fin for principal
+										if(token_usuario < token_rival){
+											System.out.println("el rival ha ganado el favor de la princesa");
+											System.exit(1);
+										}else if(token_usuario > token_rival){
+											System.out.println("el usuario ha ganado el favor de la princesa");
+											System.exit(1);
+										}else if(token_usuario==token_rival){
+											System.out.println("Ha habido un empate");
+											System.exit(1);
+										}
 							}
 					    break;
 						case 2:
@@ -170,7 +172,8 @@ public class Principal {
 			break;
 			case 3:
 				System.out.println("te has rendido ha ganado la pc");
-				System.exit(1);
+				token_rival=token_rival+1;
+				turno=turno+20;
 		    break;
 		}
 	}
