@@ -310,27 +310,57 @@ public class Principal {
 			Principal.CementerioRival();
 		break;
 		case 4://prince
-			if((CardmanoR1>=13) || (CardmanoR2>=13)){
-				System.out.println("gano el rival");
-				token_rival=token_rival+1;
-				
-			}else if((CardmanoR1<=10) || (CardmanoR2<=10)){
-				System.out.println("gana el usuario");
+			if((CardmanoU1>=13) || (CardmanoU2>=13)){
+				System.out.println("gano el usuario la pc tiene la menor carta");
 				token_usuario=token_usuario+1;
-				
+			}else if((CardmanoU1<=10) || (CardmanoU2<=10)){
+				System.out.println("gano la pc");
+				token_rival=token_rival+1;
 			}else {
 				System.out.println("empate nada ha pasado");
 			}
 			cRestantes=cRestantes-1;
-			Carta_usada=CardmanoU1;
-			nomCardmanoU1="";
-			Principal.CementerioUsuario();
+			Carta_usada=CardmanoR1;
+			nomCardmanoR1="";
+			Principal.CementerioRival();
 		break;
 		case 5://king
+			if((CardmanoU1>=14) || (CardmanoU2>=14)){
+				System.out.println("gano el usuario la pc tiene la menor carta");
+				token_usuario=token_usuario+1;
+			}else if((CardmanoU1<=12) || (CardmanoU2<=12)){
+				System.out.println("gano la pc");
+				token_rival=token_rival+1;
+			}else {
+				System.out.println("empate nada ha pasado");
+			}
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoR1;
+			nomCardmanoR1="";
+			Principal.CementerioRival();
 		break;
 		case 6://countess
+			if((CardmanoU1==15) || (CardmanoU2==15)){
+				System.out.println("gano el usuario la pc tiene la menor carta");
+				token_usuario=token_usuario+1;
+			}else if((CardmanoU1<=13) || (CardmanoU2<=13)){
+				System.out.println("gano la pc");
+				token_rival=token_rival+1;
+			}else {
+				System.out.println("empate nada ha pasado");
+			}
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoR1;
+			nomCardmanoR1="";
+			Principal.CementerioRival();
 		break;
 		case 7://princess
+			System.out.println("gano la pc");
+			token_rival=token_rival+1;
+			cRestantes=cRestantes-1;
+			Carta_usada=CardmanoR1;
+			nomCardmanoR1="";
+			Principal.CementerioRival();
 		break;
 		}
 		
@@ -928,7 +958,7 @@ public class Principal {
 			Principal.CementerioUsuario();
 			turno=turno+20;
 		}else
-		if(CardmanoU2==14){ //princess
+		if(CardmanoU2==14){ //countess
 			if((CardmanoR1==15) || (CardmanoR2==15)){
 				System.out.println("gano el rival");
 				token_rival=token_rival+1;
@@ -944,8 +974,9 @@ public class Principal {
 			Carta_usada=CardmanoU1;
 			nomCardmanoU1="";
 			Principal.CementerioUsuario();
+			turno=turno+20;
 		}else
-		if(CardmanoU2==15){
+		if(CardmanoU2==15){//princess
 			System.out.println("gana el usuario");
 			token_usuario=token_usuario+1;
 			cRestantes=cRestantes-1;
