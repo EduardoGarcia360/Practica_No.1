@@ -190,34 +190,7 @@ public class Principal {
 			turno=turno+20;
 		}
 		if((CardmanoR1==11) || (CardmanoR1==12)){
-			Random prince_pcrandom = new Random();
-			int princepcrandom = prince_pcrandom.nextInt(2);
-			switch (princepcrandom){
-			case 0:
-				System.out.println("la pc ha elegido botar tu mano");
-				cRestantes=cRestantes-1;
-				nomCardmanoU1="";
-				nomCardmanoU2="";
-				Carta_usada=CardmanoU1;
-				Principal.CementerioUsuario();
-				Carta_usada=CardmanoU2;
-				Principal.CementerioUsuario();
-				Principal.NuevacartaU1();
-				turno=turno+20;
-			break;
-			case 1:
-				System.out.println("la pc ha elegido botar su propia mano");
-				cRestantes=cRestantes-1;
-				nomCardmanoR1="";
-				nomCardmanoR2="";
-				Carta_usada=CardmanoR1;
-				Principal.CementerioRival();
-				Carta_usada=CardmanoR2;
-				Principal.CementerioRival();
-				Principal.NuevacartaR1();
-				turno=turno+20;
-			break;
-			}
+			Principal.CartaPrinceR();
 		}
 		if(CardmanoR1==13){
 			System.out.println("se van a intercambiar manos entre jugadores.");
@@ -241,6 +214,36 @@ public class Principal {
 			System.out.println("la pc ha jugado a la princes. usuario es el ganador");
 			token_usuario=token_usuario+1;
 			turno=turno+1;
+		}
+	}
+	private static void CartaPrinceR() {
+		Random prince_pcrandom = new Random();
+		int princepcrandom = prince_pcrandom.nextInt(2);
+		switch (princepcrandom){
+		case 0:
+			System.out.println("la pc ha elegido botar tu mano");
+			cRestantes=cRestantes-1;
+			nomCardmanoU1="";
+			nomCardmanoU2="";
+			Carta_usada=CardmanoU1;
+			Principal.CementerioUsuario();
+			Carta_usada=CardmanoU2;
+			Principal.CementerioUsuario();
+			Principal.NuevacartaU1();
+			turno=turno+20;
+		break;
+		case 1:
+			System.out.println("la pc ha elegido botar su propia mano");
+			cRestantes=cRestantes-1;
+			nomCardmanoR1="";
+			nomCardmanoR2="";
+			Carta_usada=CardmanoR1;
+			Principal.CementerioRival();
+			Carta_usada=CardmanoR2;
+			Principal.CementerioRival();
+			Principal.NuevacartaR1();
+			turno=turno+20;
+		break;
 		}
 	}
 	private static void CartaBaronR1() {
